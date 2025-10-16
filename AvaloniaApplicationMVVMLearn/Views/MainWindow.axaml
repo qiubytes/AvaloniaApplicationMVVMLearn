@@ -1,0 +1,71 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApplication1.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaApplication1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaApplicationMVVMLearn"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Microsoft YaHei, SimSun, sans-serif">
+    <Window.Styles>
+        <Style Selector="ListBox.ItemsListBox">
+            <!-- <Setter Property="Height" Value="300" /> -->
+            <Setter Property="FontSize" Value="30" />
+            <!-- <Setter Property="MaxHeight" Value="200"></Setter> -->
+        </Style>
+        <Style Selector="TextBlock#Txt1">
+            <Setter Property="Background" Value="Red"></Setter>
+        </Style>
+    </Window.Styles>
+    <i:Interaction.Behaviors>
+        <iac:EventTriggerBehavior EventName="Loaded">
+            <iac:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </iac:EventTriggerBehavior>
+        <iac:EventTriggerBehavior EventName="Closing">
+            <iac:InvokeCommandAction Command="{Binding ClosingCommand}" />
+        </iac:EventTriggerBehavior>
+        <iac:EventTriggerBehavior EventName="Closed">
+            <iac:InvokeCommandAction Command="{Binding ClosedCommand}" />
+        </iac:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Name="Txt1" Text="{ Binding Greeting}" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{ Binding Hello}" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+        <Button Grid.Row="1" Grid.Column="0" Content="点击" Command="{Binding Clicked1Command}"> </Button>
+        <!-- 双击事件 -->
+        <ListBox Classes="ItemsListBox" Grid.Row="1" Grid.Column="1" x:Name="ItemsListBox"
+                 ItemsSource="{Binding Items}">
+            <i:Interaction.Behaviors>
+                <iac:EventTriggerBehavior EventName="DoubleTapped">
+                    <iac:InvokeCommandAction Command="{Binding DoubleClickCommand}"
+                                             CommandParameter="{Binding #ItemsListBox.SelectedItem}" />
+                </iac:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </ListBox>
+        <Button Grid.Row="2" Grid.Column="0" Command="{Binding ClickedOpenWindowCommand}">开启新窗口</Button>
+    </Grid>
+
+
+</Window>

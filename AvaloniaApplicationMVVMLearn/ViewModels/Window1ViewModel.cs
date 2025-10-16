@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
+namespace AvaloniaApplication1.ViewModels;
+
+public partial class Window1ViewModel : ViewModelBase
+{
+    private string _title = "Window1";
+    private string _content = "Window1Content";
+
+    public string Title
+    {
+        get => _title;
+        set => SetProperty(ref _title, value);
+    }
+
+    public string Content
+    {
+        get => _content;
+        set => SetProperty(ref _content, value);
+    }
+
+    [ObservableProperty] private string _selectedItem;
+
+    /// <summary>
+    /// 选择改变
+    /// </summary>
+    /// <param name="value"></param>
+    partial void OnSelectedItemChanged(string value)
+    {
+        // 当选择项改变时自动触发
+        if (!string.IsNullOrEmpty(value))
+        {
+            // 处理选择逻辑
+            Console.WriteLine($"选中了: {value}");
+        }
+    }
+
+    public Window1ViewModel()
+    {
+        Title = "Window1";
+        Content = "Window1Content";
+        Books = new ObservableCollection<string>()
+        {
+            "Book1",
+            "Book2",
+            "Book3",
+            "Book4",
+        };
+    }
+
+    public ObservableCollection<string> Books { get; set; }
+
+    [RelayCommand]
+    private void Click1()
+    {
+        this.Content = "改变" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    }
+    [RelayCommand]
+    private void Click1ListBox(object obj)
+    { 
+        
+    }
+    [RelayCommand]
+    private void DoubleClick()
+    {
+        Debug.Write("双击");
+    }
+}
