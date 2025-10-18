@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using AvaloniaApplication1.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -22,7 +23,7 @@ public partial class Window1ViewModel : ViewModelBase
         get => _content;
         set => SetProperty(ref _content, value);
     }
-
+    [ObservableProperty] private ObservableCollection<People> _peoples;
     [ObservableProperty] private string _selectedItem;
 
     /// <summary>
@@ -50,10 +51,17 @@ public partial class Window1ViewModel : ViewModelBase
             "Book3",
             "Book4",
         };
+        _peoples = new ObservableCollection<People>()
+        {
+            new People(){ Name="张三", Des="可恶"},
+            new People(){ Name="张五", Des="可恶"},
+        };
     }
 
     public ObservableCollection<string> Books { get; set; }
 
+    [ObservableProperty]
+    private People _selectPeople;
     [RelayCommand]
     private void Click1()
     {
@@ -61,12 +69,43 @@ public partial class Window1ViewModel : ViewModelBase
     }
     [RelayCommand]
     private void Click1ListBox(object obj)
-    { 
-        
+    {
+
     }
     [RelayCommand]
     private void DoubleClick()
     {
         Debug.Write("双击");
     }
+    [RelayCommand]
+    private void SelectChanged(object obj)
+    {
+        if (obj is People p)
+        {
+            _selectPeople = p;
+            _selectedIndex = Peoples.IndexOf(_selectPeople);
+        }
+        Debug.WriteLine("选中");
+    }
+    [RelayCommand]
+    private void OnDelete()
+    {
+        if (_selectPeople != null)
+        {
+            _peoples.Remove(_selectPeople);
+            _selectPeople = null;
+        }
+        else
+        {
+            if (_selectedIndex != -1 && Peoples.Count >= _selectedIndex + 1)
+            {
+                _peoples.RemoveAt(_selectedIndex);
+            }
+        }
+        Debug.WriteLine("菜单");
+
+    }
+    [ObservableProperty]
+    private int _selectedIndex = -1;
+
 }
