@@ -1,63 +1,72 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		x:Class="AvaloniaApplication1.Views.Window1"
-		Title="Window1"
-		xmlns:vm="using:AvaloniaApplication1.ViewModels"
-		x:DataType="vm:Window1ViewModel"
-		xmlns:behaviors="clr-namespace:AvaloniaApplication1.Behaviors"
-		WindowStartupLocation="CenterScreen">
-	<Window.Styles>
-		<Style Selector="ListBox#ListBox1">
-			<Setter Property="Height" Value="100"></Setter>
-			<Setter Property="CornerRadius" Value="10"></Setter>
-			<Setter Property="Background" Value="DeepSkyBlue"></Setter>
-		</Style>
-	</Window.Styles>
-	<Design.DataContext>
-		<!-- 主要用于设计器显示
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaApplication1.Views.Window1"
+        Title="Window1"
+        xmlns:vm="using:AvaloniaApplication1.ViewModels"
+        x:DataType="vm:Window1ViewModel"
+        xmlns:behaviors="clr-namespace:AvaloniaApplication1.Behaviors"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Microsoft YaHei, SimSun, sans-serif">
+    <Window.Styles>
+        <Style Selector="ListBox#ListBox1">
+            <Setter Property="Height" Value="100"></Setter>
+            <Setter Property="CornerRadius" Value="10"></Setter>
+            <Setter Property="Background" Value="DeepSkyBlue"></Setter>
+        </Style>
+    </Window.Styles>
+    <Design.DataContext>
+        <!-- 主要用于设计器显示
 		This only sets the DataContext for the previewer in an IDE,
 		to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-		<vm:Window1ViewModel />
-	</Design.DataContext>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition></RowDefinition>
-			<RowDefinition></RowDefinition>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition></ColumnDefinition>
-		</Grid.ColumnDefinitions>
-		<StackPanel Grid.Row="0" Grid.Column="0">
-			<Button Content="{Binding Content}"></Button>
-			<Button Content="{Binding Title}" Command="{Binding Click1Command}"></Button>
-			<ListBox Name="ListBox1" ItemsSource="{Binding Books}"
-					 SelectedItem="{Binding SelectedItem}"
-					 ></ListBox>
-			<ListBox Name="ListBoxw" ItemsSource="{Binding Books}"
-					 behaviors:ClickBehavior.Command="{Binding Click1ListBoxCommand}"
-					 behaviors:ClickBehavior.CommandParameter="{Binding #ListBoxw.SelectedItem}"
-					 >
-			</ListBox>
-			<DataGrid AutoGenerateColumns="True"
-					  IsReadOnly="True"
-					  GridLinesVisibility="All"
-					  Name="DataGrid1"
-					  BorderThickness="1"
-					  BorderBrush="Gray"
-					  ItemsSource="{Binding  Peoples}"
-					  behaviors:DataGridSelectionChangedBehavior.Command="{Binding SelectChangedCommand}"
-					  behaviors:DataGridSelectionChangedBehavior.CommandParameter="{Binding #DataGrid1.SelectedItem}"
-					  >
-				<DataGrid.ContextMenu>
-					<ContextMenu>
-						<MenuItem Header="删除" Command="{Binding DeleteCommand}"/>
-						<MenuItem Header="Paste"/>
-					</ContextMenu>
-				</DataGrid.ContextMenu>
-			</DataGrid>
-		</StackPanel>
-	</Grid>
+        <vm:Window1ViewModel />
+    </Design.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Button Content="{Binding Content}"></Button>
+            <Button Content="{Binding Title}" Command="{Binding Click1Command}"></Button>
+            <ListBox Name="ListBox1" ItemsSource="{Binding Books}"
+                     SelectedItem="{Binding SelectedItem}">
+            </ListBox>
+            <ListBox Name="ListBoxw" ItemsSource="{Binding Books}"
+                     behaviors:ClickBehavior.Command="{Binding Click1ListBoxCommand}"
+                     behaviors:ClickBehavior.CommandParameter="{Binding #ListBoxw.SelectedItem}">
+            </ListBox>
+            <DataGrid AutoGenerateColumns="True"
+                      IsReadOnly="True"
+                      GridLinesVisibility="All"
+                      Name="DataGrid1"
+                      BorderThickness="1"
+                      BorderBrush="Gray"
+                      ItemsSource="{Binding  Peoples}"
+                      behaviors:DataGridSelectionChangedBehavior.Command="{Binding SelectChangedCommand}"
+                      behaviors:DataGridSelectionChangedBehavior.CommandParameter="{Binding #DataGrid1.SelectedItem}">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="删除" Command="{Binding DeleteCommand}" />
+                        <MenuItem Header="Paste" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+
+            <TextBlock>控件绑定</TextBlock>
+            <TextBox Name="txtbox3"></TextBox>
+            <Rectangle
+                Height="{Binding Path=Text,ElementName=txtbox3}"
+                Width="{Binding Path=Text,ElementName=txtbox3}"
+                Fill="Chartreuse">
+            </Rectangle>
+        </StackPanel>
+
+    </Grid>
 </Window>
