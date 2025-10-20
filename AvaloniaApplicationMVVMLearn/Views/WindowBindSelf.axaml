@@ -7,7 +7,14 @@
         xmlns:vm="using:AvaloniaApplication1.ViewModels"
         xmlns:models="clr-namespace:AvaloniaApplication1.Models"
         x:DataType="vm:WindowBindSelfViewModel"
-        Title="WindowBindSelf">
+        Title="WindowBindSelf"
+        FontFamily="Microsoft YaHei, SimSun, sans-serif">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:WindowBindSelfViewModel />
+    </Design.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -23,6 +30,22 @@
                             <TextBlock Text="{Binding Name}"></TextBlock>
                             <Button
                                 Command="{Binding ((vm:WindowBindSelfViewModel)DataContext).ItemButtonClickCommand,ElementName=ListBox1}"
+                                CommandParameter="{Binding}">
+                                点击
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock>分割线-下面是相对位置选择器</TextBlock>
+            <ListBox Name="ListBox2" ItemsSource="{Binding Peoples}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:People}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <Button
+                                Command="{Binding ((vm:WindowBindSelfViewModel)DataContext).ItemButtonClickCommand,
+                                RelativeSource={RelativeSource AncestorType=ListBox}}"
                                 CommandParameter="{Binding}">
                                 点击
                             </Button>
