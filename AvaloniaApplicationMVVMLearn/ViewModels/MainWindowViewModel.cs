@@ -39,17 +39,27 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Window t = desktop.MainWindow;
             // 创建新的主窗口
-            var loginWindow = new Window1(){DataContext = new Window1ViewModel()};
-            
+            var loginWindow = new Window1() { DataContext = new Window1ViewModel() };
+
             // 替换主窗口
             desktop.MainWindow = loginWindow;
-            
+
             // 显示新窗口
             loginWindow.Show();
-            
+
             // 关闭当前窗口
             t.Close();
         }
+    }
+
+    [RelayCommand]
+    public void ClickedOpenWindow2()
+    {
+        WindowBindSelf wbs = new WindowBindSelf()
+        {
+            DataContext = new WindowBindSelfViewModel()
+        };
+        wbs.Show();
     }
 #pragma warning restore CA1822 // Mark members as static
 

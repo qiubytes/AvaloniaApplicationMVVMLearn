@@ -8,6 +8,7 @@
         <entry key="AvaloniaApplication1/Views/Window1.axaml" value="AvaloniaApplication1/AvaloniaApplication1.csproj" />
         <entry key="AvaloniaApplicationMVVMLearn/Views/MainWindow.axaml" value="AvaloniaApplicationMVVMLearn/AvaloniaApplicationMVVMLearn.csproj" />
         <entry key="AvaloniaApplicationMVVMLearn/Views/Window1.axaml" value="AvaloniaApplicationMVVMLearn/AvaloniaApplicationMVVMLearn.csproj" />
+        <entry key="AvaloniaApplicationMVVMLearn/Views/WindowBindSelf.axaml" value="AvaloniaApplicationMVVMLearn/AvaloniaApplicationMVVMLearn.csproj" />
       </map>
     </option>
   </component>

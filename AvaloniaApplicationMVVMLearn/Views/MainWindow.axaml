@@ -44,6 +44,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -65,6 +66,7 @@
             </i:Interaction.Behaviors>
         </ListBox>
         <Button Grid.Row="2" Grid.Column="0" Command="{Binding ClickedOpenWindowCommand}">开启新窗口</Button>
+        <Button Grid.Row="3" Grid.Column="0" Command="{Binding ClickedOpenWindow2Command}">开启新窗口 绑定</Button>
     </Grid>
 
 
