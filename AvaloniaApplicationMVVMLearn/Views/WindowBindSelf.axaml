@@ -53,6 +53,21 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <TextBlock>分割线-下面是父级选择器</TextBlock>
+            <ListBox Name="ListBox3" ItemsSource="{Binding Peoples}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:People}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <Button
+                                Command="{Binding $parent[ListBox].((vm:WindowBindSelfViewModel)DataContext).ItemButtonClickCommand}"
+                                CommandParameter="{Binding}">
+                                点击
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
     </Grid>
 </Window>
