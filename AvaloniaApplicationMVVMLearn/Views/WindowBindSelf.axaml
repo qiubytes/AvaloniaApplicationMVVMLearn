@@ -70,6 +70,8 @@
             </ListBox>
             <TextBlock>分割线-下面是图片控件绑定</TextBlock>
             <Image Source="{Binding Img}" Width="50" Height="50"></Image>
+            <TextBlock Text="{Binding MyText^,FallbackValue='加载中.'}"></TextBlock>
+            <Button Command="{Binding GetImageBtnClickCommand}">点击加载图片</Button>
         </StackPanel>
     </Grid>
 </Window>
